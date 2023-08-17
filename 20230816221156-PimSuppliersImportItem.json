@@ -1,0 +1,304 @@
+{
+  "name": "PimSuppliersImportItem",
+  "icon": "bolt",
+  "color": null,
+  "description": null,
+  "trigger": "event",
+  "options": {
+    "type": "action",
+    "scope": [
+      "items.create"
+    ],
+    "collections": [
+      "SupplierItem"
+    ]
+  },
+  "operation": "6a20e685-ea52-438b-b36c-cb68730c8975",
+  "operations": [
+    {
+      "id": "0347017e-d8c5-4b0b-9418-a9fa76df4913",
+      "name": "Disparar flujo",
+      "key": "trigger_ieik4_yqnyi_hbrvq",
+      "type": "trigger",
+      "position_x": 111,
+      "position_y": 22,
+      "options": {
+        "flow": "b4a10da5-55c5-478e-a887-759bf340f9c0",
+        "payload": {
+          "url": "{{transform_md8p2_tttrl.data.data.imgs[1].src}}",
+          "data": {
+            "title": "{{$trigger.payload.supplierSku}}",
+            "folder": "661079ae-3f34-4c47-8af9-9fec657300cc"
+          }
+        }
+      },
+      "resolve": "226d3524-a8ba-4de2-9760-13b68d5035d5",
+      "reject": null
+    },
+    {
+      "id": "173ba91a-3eca-432a-bf63-abab99fdf287",
+      "name": "Condición",
+      "key": "condition_qg9h2",
+      "type": "condition",
+      "position_x": 21,
+      "position_y": 1,
+      "options": {
+        "filter": {
+          "item_read_tpkud": {
+            "initialFlowType": {
+              "_eq": "1"
+            }
+          }
+        }
+      },
+      "resolve": "641c53f1-8474-48f4-85da-d49de2c48df3",
+      "reject": "e0a44e4b-cc7d-4ff5-afad-69af6c5314a7"
+    },
+    {
+      "id": "226d3524-a8ba-4de2-9760-13b68d5035d5",
+      "name": "Actualizar datos",
+      "key": "item_update_jjext_inodf_uvlhi_frzek",
+      "type": "item-update",
+      "position_x": 132,
+      "position_y": 22,
+      "options": {
+        "collection": "{{$trigger.collection}}",
+        "key": "{{$trigger.key}}",
+        "payload": {
+          "mainPhotoId": "{{$last.data.data.id}}"
+        }
+      },
+      "resolve": null,
+      "reject": null
+    },
+    {
+      "id": "4a3344fe-51cc-482a-9c66-daa222b97487",
+      "name": "Disparar flujo",
+      "key": "trigger_ieik4_yqnyi_yhaiv",
+      "type": "trigger",
+      "position_x": 72,
+      "position_y": 42,
+      "options": {
+        "flow": "b4a10da5-55c5-478e-a887-759bf340f9c0",
+        "payload": {
+          "url": "{{transform_md8p2_tttrl_ptyvk.data.data.imgs[2].src}}",
+          "data": {
+            "title": "{{$trigger.payload.supplierSku}}",
+            "folder": "661079ae-3f34-4c47-8af9-9fec657300cc"
+          }
+        }
+      },
+      "resolve": "c9a1171a-4e92-45d1-8c86-8661ea14750c",
+      "reject": null
+    },
+    {
+      "id": "4b371f3c-66b1-400e-a22d-49775d8312bc",
+      "name": "Webhook / Solicitud de URL",
+      "key": "request_0qtkl_lnwre",
+      "type": "request",
+      "position_x": 36,
+      "position_y": 22,
+      "options": {
+        "url": "{{item_read_tpkud.itemUrlMainPhoto}}{{$trigger.payload.supplierSku}}{{item_read_tpkud.itemUrlMainPhotoPostfix}}",
+        "body": null
+      },
+      "resolve": "606238d6-936b-4a79-b103-71d0370302f0",
+      "reject": null
+    },
+    {
+      "id": "5986166a-92cd-4bde-b200-4286015a2925",
+      "name": "Actualizar datos",
+      "key": "item_update_jjext_inodf_uvlhi_frjko",
+      "type": "item-update",
+      "position_x": 55,
+      "position_y": 1,
+      "options": {
+        "collection": "{{$trigger.collection}}",
+        "key": "{{$trigger.key}}",
+        "payload": {
+          "mainPhotoId": "{{$last.data.data.id}}"
+        }
+      },
+      "resolve": null,
+      "reject": null
+    },
+    {
+      "id": "606238d6-936b-4a79-b103-71d0370302f0",
+      "name": "html2json",
+      "key": "transform_md8p2_tttrl",
+      "type": "request",
+      "position_x": 53,
+      "position_y": 22,
+      "options": {
+        "method": "POST",
+        "url": "https://html2json.com/api/v1",
+        "body": "{{$last.data}}"
+      },
+      "resolve": "ce3eddaf-ff92-44a2-a791-31dee9970bc1",
+      "reject": null
+    },
+    {
+      "id": "641c53f1-8474-48f4-85da-d49de2c48df3",
+      "name": "Disparar flujo",
+      "key": "trigger_ieik4_yqnyi_iwoja",
+      "type": "trigger",
+      "position_x": 38,
+      "position_y": 1,
+      "options": {
+        "flow": "b4a10da5-55c5-478e-a887-759bf340f9c0",
+        "payload": {
+          "url": "{{item_read_tpkud.itemUrlMainPhoto}}{{$trigger.payload.supplierSku}}{{item_read_tpkud.itemUrlMainPhotoPostfix}}",
+          "data": {
+            "title": "{{$trigger.payload.supplierSku}}",
+            "folder": "661079ae-3f34-4c47-8af9-9fec657300cc"
+          }
+        }
+      },
+      "resolve": "5986166a-92cd-4bde-b200-4286015a2925",
+      "reject": null
+    },
+    {
+      "id": "6a20e685-ea52-438b-b36c-cb68730c8975",
+      "name": "Leer datos",
+      "key": "item_read_tpkud",
+      "type": "item-read",
+      "position_x": 1,
+      "position_y": 18,
+      "options": {
+        "collection": "Supplier",
+        "key": "{{$trigger.payload.supplierCode}}",
+        "query": {
+          "fields": [
+            "itemUrlMainPhoto",
+            "itemUrlMainPhotoPostfix",
+            "initialFlowType",
+            "supplierSkuId"
+          ]
+        }
+      },
+      "resolve": "173ba91a-3eca-432a-bf63-abab99fdf287",
+      "reject": null
+    },
+    {
+      "id": "9b9a04f1-92dd-41b4-ad85-4a4ae81c9d95",
+      "name": "Actualizar datos",
+      "key": "item_update_jjext_inodf_uvlhi",
+      "type": "item-update",
+      "position_x": 90,
+      "position_y": 22,
+      "options": {
+        "collection": "{{$trigger.collection}}",
+        "key": "{{$trigger.key}}",
+        "payload": {
+          "mainPhotoId": "{{$last.data.data.id}}"
+        }
+      },
+      "resolve": null,
+      "reject": "0347017e-d8c5-4b0b-9418-a9fa76df4913"
+    },
+    {
+      "id": "c9a1171a-4e92-45d1-8c86-8661ea14750c",
+      "name": "Actualizar datos",
+      "key": "item_update_jjext_inodf_uvlhi_yqisk",
+      "type": "item-update",
+      "position_x": 90,
+      "position_y": 42,
+      "options": {
+        "collection": "{{$trigger.collection}}",
+        "key": "{{$trigger.key}}",
+        "payload": {
+          "mainPhotoId": "{{$last.data.data.id}}"
+        }
+      },
+      "resolve": null,
+      "reject": null
+    },
+    {
+      "id": "caa477dd-e93d-4ff9-996d-c1701639d661",
+      "name": "Condición",
+      "key": "condition_qg9h2_frpsp_jbndv",
+      "type": "condition",
+      "position_x": 20,
+      "position_y": 42,
+      "options": {
+        "filter": {
+          "item_read_tpkud": {
+            "initialFlowType": {
+              "_eq": "3"
+            }
+          }
+        }
+      },
+      "resolve": "e728f8d7-3005-4791-9a0c-b5b5fe973011",
+      "reject": null
+    },
+    {
+      "id": "ce3eddaf-ff92-44a2-a791-31dee9970bc1",
+      "name": "Disparar flujo",
+      "key": "trigger_ieik4_yqnyi",
+      "type": "trigger",
+      "position_x": 71,
+      "position_y": 22,
+      "options": {
+        "flow": "b4a10da5-55c5-478e-a887-759bf340f9c0",
+        "payload": {
+          "url": "{{transform_md8p2_tttrl.data.data.imgs[2].src}}",
+          "data": {
+            "title": "{{$trigger.payload.supplierSku}}",
+            "folder": "661079ae-3f34-4c47-8af9-9fec657300cc"
+          }
+        }
+      },
+      "resolve": "9b9a04f1-92dd-41b4-ad85-4a4ae81c9d95",
+      "reject": null
+    },
+    {
+      "id": "cf90f96b-5b45-4a43-8c45-4312a8ecb1a2",
+      "name": "html2json",
+      "key": "transform_md8p2_tttrl_ptyvk",
+      "type": "request",
+      "position_x": 55,
+      "position_y": 42,
+      "options": {
+        "method": "POST",
+        "url": "https://html2json.com/api/v1",
+        "body": "{{$last.data}}"
+      },
+      "resolve": "4a3344fe-51cc-482a-9c66-daa222b97487",
+      "reject": null
+    },
+    {
+      "id": "e0a44e4b-cc7d-4ff5-afad-69af6c5314a7",
+      "name": "Condición",
+      "key": "condition_qg9h2_frpsp",
+      "type": "condition",
+      "position_x": 20,
+      "position_y": 21,
+      "options": {
+        "filter": {
+          "item_read_tpkud": {
+            "initialFlowType": {
+              "_eq": "2"
+            }
+          }
+        }
+      },
+      "resolve": "4b371f3c-66b1-400e-a22d-49775d8312bc",
+      "reject": "caa477dd-e93d-4ff9-996d-c1701639d661"
+    },
+    {
+      "id": "e728f8d7-3005-4791-9a0c-b5b5fe973011",
+      "name": "Webhook / Solicitud de URL",
+      "key": "request_0qtkl_lnwre_umvtv",
+      "type": "request",
+      "position_x": 37,
+      "position_y": 42,
+      "options": {
+        "url": "{{item_read_tpkud.itemUrlMainPhoto}}{{$trigger.payload.supplierSkuId}}{{item_read_tpkud.itemUrlMainPhotoPostfix}}",
+        "body": null
+      },
+      "resolve": "cf90f96b-5b45-4a43-8c45-4312a8ecb1a2",
+      "reject": null
+    }
+  ]
+}
